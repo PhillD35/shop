@@ -6,10 +6,10 @@ class Product
   end
 
   def initialize(data)
-    @amount = data[:amount]
+    @amount = data[:amount].to_i
     @creator = data[:creator]
     @title = data[:title]
-    @price = data[:price]
+    @price = data[:price].to_i
   end
 
   def to_s

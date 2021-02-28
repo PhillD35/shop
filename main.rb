@@ -1,23 +1,11 @@
-require_relative 'lib/product.rb'
-require_relative 'lib/movie.rb'
-require_relative 'lib/book.rb'
+require_relative 'lib/product'
+require_relative 'lib/movie'
+require_relative 'lib/book'
+require_relative 'lib/product_collection'
 
-PRODUCTS = ObjectSpace
-           .each_object(Class)
-           .select { |object| object.superclass == Product }
-
-
-movies = Dir['data/movies/*txt', base: __dir__]
-books = Dir['data/books/*txt', base: __dir__]
-
-movies.map! { |movie| Movie.from_file(movie) }
-books.map! { |book| Book.from_file(book) }
-
-product_list = movies + books
-
-# product_list.map! { |product| product[:type].new(product) }
+product_collection = ProductCollection.from_dir(__dir__)
 
 puts 'Вот такие товары у нас есть:'
 puts
 
-product_list.each { |product| puts product }
+product_collection.to_a.each { |product| puts product }
