@@ -1,5 +1,5 @@
 class Book < Product
-  attr_reader :genre
+  attr_accessor :genre
 
   def initialize(data)
     super
