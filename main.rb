@@ -2,34 +2,20 @@ require_relative 'lib/product.rb'
 require_relative 'lib/movie.rb'
 require_relative 'lib/book.rb'
 
-product_list = [
-  {
-    amount: 5,
-    creator: 'Люк Бессон',
-    price: 990,
-    title: 'Леон',
-    type: Movie,
-    year: 1994
-  },
-  {
-    amount: 1,
-    creator: 'Юрий Быков',
-    price: 390,
-    title: 'Дурак',
-    type: Movie,
-    year: 2014
-  },
-  {
-    amount: 10,
-    creator: 'Федор Достоевский',
-    genre: 'роман',
-    price: 390,
-    title: 'Идиот',
-    type: Book
-  }
-]
+PRODUCTS = ObjectSpace
+           .each_object(Class)
+           .select { |object| object.superclass == Product }
 
-product_list.map! { |product| product[:type].new(product) }
+
+movies = Dir['data/movies/*txt', base: __dir__]
+books = Dir['data/books/*txt', base: __dir__]
+
+movies.map! { |movie| Movie.from_file(movie) }
+books.map! { |book| Book.from_file(book) }
+
+product_list = movies + books
+
+# product_list.map! { |product| product[:type].new(product) }
 
 puts 'Вот такие товары у нас есть:'
 puts

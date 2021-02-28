@@ -1,6 +1,10 @@
 class Product
   attr_accessor :amount, :creator, :title, :price
 
+  def self.from_file
+    raise NotImplementedError
+  end
+
   def initialize(data)
     @amount = data[:amount]
     @creator = data[:creator]
