@@ -1,9 +1,15 @@
 class ProductCollection
   attr_reader :products
 
-  def self.from_dir(dir_path, product_types)
+  PRODUCT_TYPES = [
+  {type: Book, path: 'data/books/*.txt'},
+  {type: Disc, path: 'data/discs/*.txt'},
+  {type: Movie, path: 'data/movies/*.txt'}
+  ]
+
+  def self.from_dir(dir_path)
     result =
-      product_types.each_with_object([]) do |product_type, object|
+      PRODUCT_TYPES.each_with_object([]) do |product_type, object|
         path = File.join(dir_path, product_type[:path])
         list_of_files = Dir[path]
 
@@ -21,6 +27,10 @@ class ProductCollection
     @products = products
   end
 
+  def [](index)
+    @products[index]
+  end
+
   def each(&block)
     @products.each(&block)
   end
@@ -33,5 +43,11 @@ class ProductCollection
     sorted_list = @products.sort_by(&by)
 
     reverse ? sorted_list : sorted_list.reverse
+  end
+
+  def sort!(by: :price, reverse: false)
+    @products.sort_by!(&by)
+
+    reverse ? @products : @products.reverse
   end
 end
