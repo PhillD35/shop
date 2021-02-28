@@ -13,17 +13,11 @@ class Product
   end
 
   def to_s
-    # todo
+    raise NotImplementedError
   end
 
   def show_price_and_amount
-    "#{@price}. (останось #{@amount})"
-  end
-
-  def allowed_keys
-    self.instance_variables.map do |var|
-      var.to_s.gsub('@', '').to_sym
-    end
+    "#{@price} руб. (осталось #{@amount})"
   end
 
   def update(data)
@@ -31,6 +25,14 @@ class Product
 
     keys_to_update.each do |key|
       instance_variable_set("@#{key}", data[key])
+    end
+  end
+
+  private
+
+  def allowed_keys
+    self.instance_variables.map do |var|
+      var.to_s.gsub('@', '').to_sym
     end
   end
 end

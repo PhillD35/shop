@@ -9,7 +9,7 @@ class Movie < Product
       creator: lines[1],
       year: lines[2],
       price: lines[3],
-      amount: lines[4],
+      amount: lines[4]
     }
 
     self.new(data)

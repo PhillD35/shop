@@ -9,7 +9,7 @@ class Book < Product
       genre: lines[1],
       creator: lines[2],
       price: lines[3],
-      amount: lines[4],
+      amount: lines[4]
     }
 
     self.new(data)

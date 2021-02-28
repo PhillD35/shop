@@ -1,14 +1,9 @@
 class ProductCollection
   attr_reader :products
 
-  PRODUCT_TYPES = [
-    {type: Movie, path: 'data/movies/*.txt'},
-    {type: Book, path: 'data/books/*.txt'}
-  ]
-
-  def self.from_dir(dir_path)
+  def self.from_dir(dir_path, product_types)
     result =
-      PRODUCT_TYPES.each_with_object([]) do |product_type, object|
+      product_types.each_with_object([]) do |product_type, object|
         path = File.join(dir_path, product_type[:path])
         list_of_files = Dir[path]
 
@@ -24,6 +19,10 @@ class ProductCollection
 
   def initialize(products)
     @products = products
+  end
+
+  def each(&block)
+    @products.each(&block)
   end
 
   def to_a
