@@ -39,6 +39,12 @@ class ProductCollection
     @products
   end
 
+  def to_s
+    @products.each.with_index(1).map do |product, index|
+      "#{index}. #{product}"
+    end.join("\n")
+  end
+
   def sort(by: :price, reverse: false)
     sorted_list = @products.sort_by(&by)
 
