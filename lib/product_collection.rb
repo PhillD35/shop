@@ -28,31 +28,39 @@ class ProductCollection
   end
 
   def [](index)
-    @products[index]
+    compact_products[index]
+  end
+
+  def compact_products
+    @products.reject(&:sold_out?)
   end
 
   def each(&block)
-    @products.each(&block)
+    compact_products.each(&block)
   end
 
   def to_a
-    @products
+    compact_products
   end
 
   def to_s
-    @products.each.with_index(1).map do |product, index|
+    compact_products.each.with_index(1).map do |product, index|
       "#{index}. #{product}"
     end.join("\n")
   end
 
+  def size
+    compact_products.size
+  end
+
   def sort(by: :price, reverse: false)
-    sorted_list = @products.sort_by(&by)
+    sorted_list = compact_products.sort_by(&by)
 
     reverse ? sorted_list : sorted_list.reverse
   end
 
   def sort!(by: :price, reverse: false)
-    @products.sort_by!(&by)
+    compact_products.sort_by!(&by)
 
     reverse ? @products : @products.reverse
   end

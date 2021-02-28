@@ -16,6 +16,10 @@ class Product
     raise NotImplementedError
   end
 
+  def sold_out?
+    @amount == 0
+  end
+
   def show_price_and_amount
     "#{@price} руб. (осталось #{@amount})"
   end
