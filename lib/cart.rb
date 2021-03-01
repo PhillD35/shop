@@ -18,8 +18,24 @@ class Cart
   end
 
   def to_s
-    @goods
-      .sort_by(&:type)
-      .join("\n")
+    @goods.uniq.sort_by(&:type).map do |product|
+      "#{product} x #{amount_in_cart[product]}"
+    end.join("\n")
+  end
+
+  private
+
+  def amount_in_cart
+    @goods.each_with_object({}) do |product, object|
+      add_amount_for_product(product, object)
+    end
+  end
+
+  def add_amount_for_product(product, object)
+    if object.key?(product)
+      object[product] += 1
+    else
+      object.merge!({product => 1})
+    end
   end
 end
