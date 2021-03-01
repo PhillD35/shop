@@ -14,13 +14,12 @@ class Cart
   end
 
   def price_total
-    @goods.map(&:price).sum
+    @goods.sum(&:price)
   end
 
   def to_s
     @goods
-    .sort_by(&:title)
-    .map(&:to_s)
-    .join("\n")
+      .sort_by(&:title)
+      .join("\n")
   end
 end

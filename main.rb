@@ -18,7 +18,7 @@ loop do
   print 'Ваш выбор: '
   input = STDIN.gets.to_i
 
-  break if input == 0
+  break if input.zero?
 
   if input.between?(1, product_collection.size)
     chosen_product = product_collection[input - 1]

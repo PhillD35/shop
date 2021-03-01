@@ -22,6 +22,7 @@ class Book < Product
   end
 
   def to_s
-    "Книга \"#{@title}\", #{@genre}, автор - #{@creator}, #{show_price_and_amount}"
+    "Книга \"#{@title}\", #{@genre}, автор - #{@creator}, " \
+    "#{price_and_amount_to_s}"
   end
 end

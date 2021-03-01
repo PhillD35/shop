@@ -22,6 +22,7 @@ class Movie < Product
   end
 
   def to_s
-    "Фильм \"#{@title}\", #{@year}, реж. #{@creator}, #{show_price_and_amount}"
+    "Фильм \"#{@title}\", #{@year}, реж. #{@creator}, " \
+    "#{price_and_amount_to_s}"
   end
 end

@@ -24,7 +24,7 @@ class Disc < Product
   end
 
   def to_s
-    "Альбом #{@creator} - \"#{@title}\", #{@genre}, #{@year}, #{show_price_and_amount}"
+    "Альбом #{@creator} - \"#{@title}\", #{@genre}, #{@year}, " \
+    "#{price_and_amount_to_s}"
   end
 end
-# Альбом Judas Priest — «Painkiller», Heavy Metal, 1990, 990 руб. (осталось 3)
