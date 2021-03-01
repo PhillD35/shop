@@ -19,7 +19,7 @@ class Cart
 
   def to_s
     @goods
-      .sort_by(&:title)
+      .sort_by(&:type)
       .join("\n")
   end
 end

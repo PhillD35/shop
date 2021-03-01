@@ -1,5 +1,5 @@
 class Product
-  attr_accessor :amount, :creator, :title, :price
+  attr_accessor :amount, :creator, :title, :type, :price
 
   def self.from_file
     raise NotImplementedError
@@ -9,6 +9,7 @@ class Product
     @amount = data[:amount].to_i
     @creator = data[:creator]
     @title = data[:title]
+    @type = self.class.to_s.downcase
     @price = data[:price].to_i
   end
 
