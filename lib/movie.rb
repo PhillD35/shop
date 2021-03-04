@@ -22,7 +22,12 @@ class Movie < Product
   end
 
   def to_s
-    "Фильм \"#{@title}\", #{@year}, реж. #{@creator}, " \
-    "#{price_and_amount_to_s}"
+    "Фильм \"#{@title}\", #{@year}, реж. #{@creator}, #{super}"
+  end
+
+  def update(data)
+    super
+
+    @year = data[:year] if data.key?(:year)
   end
 end

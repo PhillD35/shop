@@ -1,6 +1,4 @@
 class ProductCollection
-  attr_reader :products
-
   PRODUCT_TYPES = [
     {type: Book, path: 'data/books/*.txt'},
     {type: Disc, path: 'data/discs/*.txt'},
@@ -27,15 +25,11 @@ class ProductCollection
   end
 
   def [](index)
-    compact_products[index]
+    compact_products[index - 1]
   end
 
   def compact_products
     @products.reject(&:sold_out?)
-  end
-
-  def each(&block)
-    compact_products.each(&block)
   end
 
   def to_a
@@ -52,13 +46,9 @@ class ProductCollection
     compact_products.size
   end
 
-  def sort!(by: :price, reverse: false, array: @products)
-    array.sort_by!(&by)
+  def sort!(by: :price, reverse: false)
+    @products.sort_by!(&by)
 
     reverse ? array : array.reverse!
-  end
-
-  def sort(by: :price, reverse: false)
-    sort!(by: by, reverse: reverse, array: @products.clone)
   end
 end
