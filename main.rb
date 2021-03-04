@@ -20,14 +20,15 @@ loop do
 
   break if input.zero?
 
-  if input.between?(1, product_collection.size)
-    chosen_product = product_collection[input - 1]
-    cart.add(chosen_product)
+  chosen_product = product_collection[input]
 
-    puts "Вы выбрали: #{chosen_product}"
-    puts
-    puts "Всего товаров на сумму: #{cart.price_total}"
-  end
+  next if chosen_product.nil?
+
+  cart.add(chosen_product)
+
+  puts "Вы выбрали: #{chosen_product}"
+  puts
+  puts "Всего товаров на сумму: #{cart.total}"
 
   puts
 end
@@ -40,5 +41,5 @@ else
   puts 'Вы купили:'
   puts cart
   puts
-  puts "С Вас - #{cart.price_total} руб. Спасибо за покупки!"
+  puts "С Вас - #{cart.total} руб. Спасибо за покупки!"
 end

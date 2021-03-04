@@ -22,7 +22,12 @@ class Book < Product
   end
 
   def to_s
-    "Книга \"#{@title}\", #{@genre}, автор - #{@creator}, " \
-    "#{price_and_amount_to_s}"
+    "Книга \"#{@title}\", #{@genre}, автор - #{@creator}, #{super}"
+  end
+
+  def update(data)
+    super
+
+    @genre = data[:genre] if data.key?(:genre)
   end
 end

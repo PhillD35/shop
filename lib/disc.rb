@@ -24,7 +24,13 @@ class Disc < Product
   end
 
   def to_s
-    "Альбом #{@creator} - \"#{@title}\", #{@genre}, #{@year}, " \
-    "#{price_and_amount_to_s}"
+    "Альбом #{@creator} - \"#{@title}\", #{@genre}, #{@year}, #{super}"
+  end
+
+  def update(data)
+    super
+
+    @genre = data[:genre] if data.key?(:genre)
+    @year = data[:year] if data.key?(:year)
   end
 end

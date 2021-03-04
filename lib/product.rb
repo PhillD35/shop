@@ -1,5 +1,5 @@
 class Product
-  attr_accessor :amount, :creator, :title, :type, :price
+  attr_accessor :amount, :creator, :title, :price
 
   def self.from_file
     raise NotImplementedError
@@ -9,35 +9,21 @@ class Product
     @amount = data[:amount].to_i
     @creator = data[:creator]
     @title = data[:title]
-    @type = self.class.to_s.downcase
     @price = data[:price].to_i
   end
 
   def to_s
-    raise NotImplementedError
+    "#{@price} руб. (осталось #{@amount})"
   end
 
   def sold_out?
     @amount.zero?
   end
 
-  def price_and_amount_to_s
-    "#{@price} руб. (осталось #{@amount})"
-  end
-
   def update(data)
-    keys_to_update = data.keys & allowed_keys
-
-    keys_to_update.each { |key| instance_variable_set("@#{key}", data[key]) }
-  end
-
-  private
-
-  def allowed_keys
-    self.instance_variables.map do |var|
-      var.to_s
-         .gsub('@', '')
-         .to_sym
-    end
+    @amount = data[:amount] if data.key?(:amount)
+    @creator = data[:creator] if data.key?(:creator)
+    @title = data[:title] if data.key?(:title)
+    @price = data[:price] if data.key?(:price)
   end
 end
